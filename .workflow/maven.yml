@@ -53,12 +53,12 @@ stages:
           - name: BUILD_BUKKIT
             path:
               - ./plumbot-bukkit/target/plumbot*.jar
-          - name: BUILD_BUNGEE
-            path:
-              - ./plumbot-bungee/target/plumbot*.jar
-          - name: BUILD_VELOCITY
-            path:
-              - ./plumbot-velocity/target/plumbot*.jar
+          # - name: BUILD_BUNGEE
+          #   path:
+          #     - ./plumbot-bungee/target/plumbot*.jar
+          # - name: BUILD_VELOCITY
+          #   path:
+          #     - ./plumbot-velocity/target/plumbot*.jar
         settings: []
         caches: []
         notify: []
