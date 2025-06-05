@@ -12,8 +12,6 @@
     <name>PlumBot</name>
     <modules>
         <module>plumbot-bukkit</module>
-        <module>plumbot-bungee</module>
-        <module>plumbot-velocity</module>
     </modules>
 
     <properties>

@@ -42,23 +42,13 @@
             <id>griefdefender</id>
             <url>https://repo.glaremasters.me/repository/bloodshot</url>
         </repository>
-        <!--
-        <repository>
-            <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
-            <id>sonatype</id>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
-        </repository>
-        -->
     </repositories>
 
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>21.0</version>
+            <version>33.4.8-jre</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -79,14 +69,6 @@
             <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-<!--
-        <dependency>
-            <groupId>me.clip</groupId>
-            <artifactId>placeholderapi</artifactId>
-            <version>2.10.3</version>
-            <scope>provided</scope>
-        </dependency>
--->
         <dependency>
             <groupId>fr.xephi</groupId>
             <artifactId>authme</artifactId>
@@ -125,19 +107,6 @@
             <version>0.1.6</version>
             <scope>compile</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.github.SNWCreations</groupId>-->
-<!--            <artifactId>KookBC</artifactId>-->
-<!--            <version>0.27.4</version>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
-        <!--
-        <dependency>
-            <groupId>org.bstats</groupId>
-            <artifactId>bstats-bukkit</artifactId>
-            <version>3.0.0</version>
-            <scope>compile</scope>
-        </dependency>-->
     </dependencies>
 
     <build>
@@ -153,10 +122,33 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>module-info.class</exclude>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                        <exclude>META-INF/MANIFEST.MF</exclude>
+                                        <exclude>META-INF/DEPENDENCIES</exclude>
+                                        <exclude>META-INF/NOTICE</exclude>
+                                        <exclude>META-INF/LICENSE</exclude>
+                                        <exclude>META-INF/LICENSE.txt</exclude>
+                                        <exclude>META-INF/NOTICE.txt</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"/>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
+                                    <resource>module-info.class</resource>
+                                </transformer>
+                            </transformers>
                             <relocations>
                                 <relocation>
                                     <pattern>com.github.Anon8281.universalScheduler</pattern>
-                                    <!-- Don't forget to replace -->
                                     <shadedPattern>me.regadpole.plumbot.universalScheduler</shadedPattern>
                                 </relocation>
                                 <relocation>
@@ -184,26 +176,23 @@
                     </execution>
                 </executions>
             </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <version>3.3.1</version>
-            <configuration>
-                <encoding>UTF-8</encoding>
-                <!-- 过滤后缀不需要转码的文件后缀名.ttf-->
-                <nonFilteredFileExtensions>
-                    <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
-                </nonFilteredFileExtensions>
-            </configuration>
-        </plugin>
-    </plugins>
-    <resources>
-        <resource>
-            <directory>src/main/resources</directory>
-            <filtering>true</filtering>
-        </resource>
-    </resources>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
-
-
 </project>

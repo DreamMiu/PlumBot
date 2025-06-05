@@ -4,7 +4,6 @@ import com.github.Anon8281.universalScheduler.UniversalScheduler;
 import com.github.Anon8281.universalScheduler.scheduling.schedulers.TaskScheduler;
 import me.regadpole.plumbot.bot.Bot;
 import me.regadpole.plumbot.bot.KookBot;
-import me.regadpole.plumbot.bot.QQBot;
 import me.regadpole.plumbot.command.Commands;
 import me.regadpole.plumbot.config.Config;
 import me.regadpole.plumbot.event.server.QsChatEvent;
@@ -68,11 +67,6 @@ public final class PlumBot extends JavaPlugin implements Listener {
 
         getScheduler().runTaskAsynchronously(() -> {
             switch (Config.getBotMode()) {
-                case "go-cqhttp":
-                    bot = new QQBot();
-                    bot.start();
-                    getLogger().info("已启动go-cqhttp服务");
-                    break;
                 case "kook":
                     bot = new KookBot();
                     bot.start();
@@ -100,10 +94,6 @@ public final class PlumBot extends JavaPlugin implements Listener {
     public void onDisable() {
 
         switch (Config.getBotMode()) {
-            case "go-cqhttp":
-                bot.shutdown();
-                getLogger().info("已关闭go-cqhttp服务");
-                break;
             case "kook":
                 bot.shutdown();
                 getLogger().info("已关闭kook服务");
